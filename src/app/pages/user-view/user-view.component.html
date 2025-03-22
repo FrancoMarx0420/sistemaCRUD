@@ -1,0 +1,44 @@
+<div class="container my-5">
+  <div class="row align-items-center">
+    <div class="col-md-4 text-center">
+      <img
+        [src]="myUser.image"
+        [alt]="myUser.username"
+        class="rounded-circle img-fluid"
+        style="
+          width: 250px;
+          height: 250px;
+          object-fit: cover;
+          background-color: #2764ff;
+        "
+      />
+    </div>
+
+    <div class="col-md-1 d-none d-md-block">
+      <div class="vr h-100"></div>
+    </div>
+
+    <div class="col-md-7">
+      <h4 class="fw-normal">{{ myUser.first_name }}</h4>
+      <h5 class="fw-light mb-4">{{ myUser.last_name }}</h5>
+
+      <p><strong>Nombre Usuario: </strong> {{ myUser.username }}</p>
+      <p><strong>Email: </strong>{{ myUser.email }}</p>
+
+      <div class="btn-group mt-3" role="group">
+        <button class="btn btn-outline-danger" (click)="deleteUser(myUser._id)">
+          Borrar
+        </button>
+        <button
+          class="btn btn-outline-primary"
+          [routerLink]="['/updateuser', myUser._id]"
+        >
+          Actualizar
+        </button>
+        <button class="btn btn-outline-secondary" [routerLink]="'/user'">
+          Volver a listado
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
