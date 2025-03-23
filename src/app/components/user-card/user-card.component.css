@@ -1,0 +1,14 @@
+.userImg {
+  min-height: 300px;
+  max-height: 300px;
+  object-position: center center;
+  object-fit: contain;
+  width: 100%;
+}
+.lens {
+  min-height: 30px;
+  max-height: 30px;
+  object-position: center center;
+  object-fit: contain;
+  width: 100%;
+}

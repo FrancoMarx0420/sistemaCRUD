@@ -1,0 +1,43 @@
+<div
+  class="card d-flex flex-column align-items-center p-3 mx-auto"
+  style="max-width: 300px"
+>
+  <figure class="m-0">
+    <img
+      class="userImg img-fluid rounded-circle"
+      [src]="myUser.image"
+      [alt]="myUser.first_name"
+    />
+  </figure>
+  <div class="p-3 text-center w-100">
+    <h3 class="text-black text-break fw-bold">
+      {{ myUser.first_name }} {{ myUser.last_name }}
+    </h3>
+    <div class="d-flex justify-content-around text-center mt-2 w-100">
+      <div class="flex-fill">
+        <img
+          class="lens d-block mx-auto"
+          src="./images/lens.png"
+          alt="Ver detalle"
+        />
+        <p [routerLink]="['/user', myUser._id]">Ver detalle</p>
+      </div>
+      <div class="flex-fill">
+        <img
+          class="lens d-block mx-auto"
+          src="./images/lens.png"
+          alt="Actualizar"
+        />
+        <p [routerLink]="['/updateuser', myUser._id]">Actualizar</p>
+      </div>
+      <div class="flex-fill">
+        <img
+          class="lens d-block mx-auto"
+          src="./images/lens.png"
+          alt="Borrar"
+        />
+        <p (click)="deleteUser(myUser._id)">Borrar</p>
+      </div>
+    </div>
+  </div>
+</div>

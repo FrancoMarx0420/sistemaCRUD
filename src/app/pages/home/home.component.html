@@ -1,0 +1,13 @@
+<section class="users">
+  <div class="row g-4 justify-content-center">
+    @for (user of arrUsersPromises; track user._id) {
+    <article class="col-12 col-md-6 col-lg-3">
+      <app-user-card [myUser]="user"></app-user-card>
+    </article>
+    }
+  </div>
+  <div class="d-flex justify-content-between p-5">
+    <button class="btn btn-warning" (click)="gotoPrev()">PREV</button
+    ><button class="btn btn-warning" (click)="gotoNext()">NEXT</button>
+  </div>
+</section>
