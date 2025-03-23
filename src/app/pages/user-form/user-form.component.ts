@@ -108,20 +108,19 @@ export class UserFormComponent {
     try {
       if (this.userForm.value._id) {
         response = await this.userService.update(this.userForm.value);
-        console.log(response);
       } else {
         response = await this.userService.insert(this.userForm.value);
         response._id = response._id || response.id;
-        response.id = Math.floor(Math.random() * 100) + 1; //esto se hace porque al solicitar post postea el id en lugar de _id
+        delete response.id; //esto se hace porque al solicitar post postea el id en lugar de _id
       }
       if (response._id) {
         Swal.fire({
-          title: `El usuario ${this.myUser.first_name} ha sido ${this.message}`,
+          title: `El usuario ha sido ${this.message}`,
           confirmButtonText: 'aceptar',
         }).then((result) => {
           if (result.isConfirmed) {
             Swal.fire('redirigiendo', '', 'success');
-            console.log(response);
+
             this.router.navigate(['/home']);
           }
         });
