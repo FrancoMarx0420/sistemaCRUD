@@ -35,33 +35,6 @@ export class UserFormComponent {
   }
 
   async ngOnInit() {
-    if (this._id) {
-      try {
-        this.myUser = await this.userService.getById(this._id);
-
-        if ('_id' in this.myUser) {
-          this.title = 'Actualizar';
-          this.message = 'Actualizado';
-        } else {
-          Swal.fire({
-            icon: 'error',
-            title: 'Ups...',
-            text: (this.myUser as any).error,
-            confirmButtonText: 'aceptar',
-          }).then((result) => {
-            if (result.isConfirmed) {
-              this.router.navigate(['/home']);
-            }
-          });
-        }
-      } catch (msg: any) {
-        Swal.fire({
-          icon: 'error',
-          title: 'Ups...',
-          text: msg.error,
-        });
-      }
-    }
     this.userForm = new FormGroup(
       {
         _id: new FormControl(this._id || undefined, []),
@@ -85,6 +58,41 @@ export class UserFormComponent {
       },
       []
     );
+    if (this._id) {
+      try {
+        this.myUser = await this.userService.getById(this._id);
+
+        if ('_id' in this.myUser) {
+          this.title = 'Actualizar';
+          this.message = 'Actualizado';
+          this.userForm.patchValue({
+            _id: this.myUser._id,
+            first_name: this.myUser.first_name,
+            last_name: this.myUser.last_name,
+            username: this.myUser.username,
+            email: this.myUser.email,
+            image: this.myUser.image,
+          });
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Ups...',
+            text: (this.myUser as any).error,
+            confirmButtonText: 'aceptar',
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.router.navigate(['/home']);
+            }
+          });
+        }
+      } catch (msg: any) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Ups...',
+          text: msg.error,
+        });
+      }
+    }
   }
   async getDataForm() {
     if (this.userForm.invalid) {
@@ -108,11 +116,12 @@ export class UserFormComponent {
       }
       if (response._id) {
         Swal.fire({
-          title: `El usuario ha sido ${this.message}`,
+          title: `El usuario ${this.myUser.first_name} ha sido ${this.message}`,
           confirmButtonText: 'aceptar',
         }).then((result) => {
           if (result.isConfirmed) {
             Swal.fire('redirigiendo', '', 'success');
+            console.log(response);
             this.router.navigate(['/home']);
           }
         });

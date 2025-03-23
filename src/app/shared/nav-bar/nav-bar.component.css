@@ -1,3 +1,10 @@
 .logo {
-  max-width: 80px;
+  max-width: 100px;
+}
+
+.botones {
+  cursor: pointer;
+}
+h5 {
+  pointer-events: auto;
 }

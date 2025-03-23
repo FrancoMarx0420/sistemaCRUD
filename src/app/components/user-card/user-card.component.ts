@@ -18,23 +18,21 @@ export class UserCardComponent {
   deleteUser(id: string) {
     Swal.fire({
       title: `Estas seguro que quieres borrar al usuario ${this.myUser.first_name}?`,
-      text: 'No podras revertirlo!',
+      text: 'No podras revertir los cambios!',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!',
+      confirmButtonText: 'Borrar!',
     }).then(async (result) => {
-      //hacer bien esto
       let response = await this.userServices.delete(id);
-
-      if (result.isConfirmed && (response as any)._id) {
+      if (result.isConfirmed && response._id) {
         Swal.fire({
           title: 'Usuario Borrado!',
-          text: `se ha borrado al usuario ${this.myUser.first_name}`,
+          text: `Se ha borrado al usuario ${this.myUser.first_name}`,
           icon: 'success',
         });
-      } else if (result.isDenied) {
+      } else if (Swal.DismissReason.cancel) {
       } else {
         Swal.fire({
           title: 'Algo salio mal!',

@@ -28,28 +28,35 @@ export class UserViewComponent {
         });
         this.router.navigate(['/home']);
       }
-    } catch (error) {}
+    } catch (msg: any) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Ups...',
+        text: msg.error,
+        confirmButtonText: 'aceptar',
+      });
+    }
   }
   deleteUser(id: string) {
     Swal.fire({
-      title: `Estas seguro que quieres borrar al usuario ${this.myUser.first_name}?`,
-      text: 'no podras revertirlo!',
+      title: `Estas seguro que quieres borrar al usuario ${this.myUser?.first_name}?`,
+      text: 'No podras revertir los cambios!',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!',
+      confirmButtonText: 'Borrar!',
     }).then(async (result) => {
       let response = await this.userServices.delete(id);
 
       if (result.isConfirmed && (response as any)._id) {
         Swal.fire({
           title: 'Usuario Borrado!',
-          text: `se ha borrado al usuario ${this.myUser.first_name}`,
+          text: `Se ha borrado al usuario ${this.myUser?.first_name}`,
           icon: 'success',
         });
         this.router.navigate(['/home']);
-      } else if (result.isDenied) {
+      } else if (Swal.DismissReason.cancel) {
       } else {
         Swal.fire({
           title: 'Algo salio mal!',
@@ -57,6 +64,14 @@ export class UserViewComponent {
           icon: 'warning',
         });
       }
+    });
+  }
+  vistaPrevia() {
+    console.log('qp');
+    Swal.fire({
+      imageUrl: this.myUser.image,
+      imageAlt: 'A tall image',
+      confirmButtonText: 'Cerrar',
     });
   }
 }

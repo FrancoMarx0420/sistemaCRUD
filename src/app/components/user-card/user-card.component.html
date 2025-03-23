@@ -1,42 +1,44 @@
-<div
-  class="card d-flex flex-column align-items-center p-3 mx-auto"
-  style="max-width: 300px"
->
-  <figure class="m-0">
+<div class="card d-flex flex-column align-items-center p-2 mx-auto h-100">
+  <figure class="botones m-0" [routerLink]="['/user', myUser._id]">
     <img
       class="userImg img-fluid rounded-circle"
       [src]="myUser.image"
       [alt]="myUser.first_name"
     />
   </figure>
-  <div class="p-3 text-center w-100">
-    <h3 class="text-black text-break fw-bold">
+  <div
+    class="p-2 text-center w-100 d-flex flex-column justify-content-between flex-grow-1"
+  >
+    <h5
+      class="botones text-black text-break fw-bold mb-2"
+      [routerLink]="['/user', myUser._id]"
+    >
       {{ myUser.first_name }} {{ myUser.last_name }}
-    </h3>
+    </h5>
     <div class="d-flex justify-content-around text-center mt-2 w-100">
-      <div class="flex-fill">
+      <div [routerLink]="['/user', myUser._id]" class="botones flex-fill">
         <img
           class="lens d-block mx-auto"
-          src="./images/lens.png"
+          src="./images/lupa.png"
           alt="Ver detalle"
         />
         <p [routerLink]="['/user', myUser._id]">Ver detalle</p>
       </div>
-      <div class="flex-fill">
+      <div [routerLink]="['/updateuser', myUser._id]" class="botones flex-fill">
         <img
           class="lens d-block mx-auto"
-          src="./images/lens.png"
+          src="./images/actualizar.png"
           alt="Actualizar"
         />
         <p [routerLink]="['/updateuser', myUser._id]">Actualizar</p>
       </div>
-      <div class="flex-fill">
+      <div (click)="deleteUser(myUser._id)" class="botones flex-fill">
         <img
           class="lens d-block mx-auto"
-          src="./images/lens.png"
+          src="./images/borrar.png"
           alt="Borrar"
         />
-        <p (click)="deleteUser(myUser._id)">Borrar</p>
+        <p>Borrar</p>
       </div>
     </div>
   </div>

@@ -5,10 +5,16 @@
   object-fit: contain;
   width: 100%;
 }
+.card {
+  max-width: 300px;
+}
 .lens {
   min-height: 30px;
   max-height: 30px;
   object-position: center center;
   object-fit: contain;
   width: 100%;
+}
+.botones {
+  cursor: pointer;
 }

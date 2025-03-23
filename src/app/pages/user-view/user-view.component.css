@@ -1,0 +1,9 @@
+.imagen-view {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  background-color: #2764ff;
+}
+.vista-previa {
+  cursor: pointer;
+}
